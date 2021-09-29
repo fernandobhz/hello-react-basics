@@ -56,13 +56,7 @@ const LastChangeContext = createContext({
 });
 
 function VerContexto() {
-  return (
-    <LastChangeContext.Consumer>
-      {({ change }) => (
-        <div>A ultima mudança foi: '{change}'</div>
-      )}
-    </LastChangeContext.Consumer>
-  );
+  return <LastChangeContext.Consumer>{({ change }) => <div>A ultima mudança foi: '{change}'</div>}</LastChangeContext.Consumer>;
 }
 
 function ModificaContexto() {
@@ -70,10 +64,28 @@ function ModificaContexto() {
     <LastChangeContext.Consumer>
       {({ setChange }) => (
         <div>
-          <button onClick={() => setChange(prompt("qual o novo valor do contexto?", new Date().toISOString()))}>Atualizar contexto</button>
+          <button onClick={() => setChange(prompt("qual o novo valor do contexto?", Math.random().toString(36).slice(-5)))}>Atualizar contexto</button>
         </div>
       )}
     </LastChangeContext.Consumer>
+  );
+}
+
+// ----------------------------------------------------------------------------------------------------------------------------------------
+
+function VerContextoHooks() {
+  const { change } = useContext(LastChangeContext);
+
+  return <div>(Hooks) A ultima mudança foi: '{change}'</div>;
+}
+
+function ModificaContextoHooks() {
+  const { setChange } = useContext(LastChangeContext);
+
+  return (
+    <div>
+      (Hooks) <button onClick={() => setChange(prompt("qual o novo valor do contexto?", Math.random().toString(36).slice(-5)))}>Atualizar contexto</button>
+    </div>
   );
 }
 
@@ -85,13 +97,15 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <LastChangeContext.Provider value={{change, setChange}}>
+        <LastChangeContext.Provider value={{ change, setChange }}>
           <Abc a="1" b="2" c="3" />
           <Xyz x="1" y="2" z="3" />
           <Termostato />
           <Agora />
           <VerContexto />
           <ModificaContexto />
+          <VerContextoHooks />
+          <ModificaContextoHooks />
         </LastChangeContext.Provider>
       </header>
     </div>
