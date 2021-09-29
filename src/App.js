@@ -130,7 +130,8 @@ function App() {
         <a href="/AbcUse/a/b/c">AbcUse</a>
         <a href="/XyzUse/1/2/3">XyzUse</a>
         <a href="/Termostato">Termostato</a>
-        <a href="/Agora">Agora</a> -<a href="#VerContexto">VerContexto</a>
+        <a href="/Agora">Agora</a>
+        <a href="/VerContexto">VerContexto</a>
         <a href="/ModificaContexto">ModificaContexto</a>
         <a href="/VerContextoHooks">VerContextoHooks</a>
         <a href="/ModificaContextoHooks">ModificaContextoHooks</a>
