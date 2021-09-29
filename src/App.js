@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import "./App.css";
 
 const utcServiceUrl = `https://app-current-utc-git-fernandobh.herokuapp.com`;
+const responseJson = response => response.json();
+
 
 function Agora() {
   const [utc, setUtc] = useState(`loading`);
 
-  const atualiza = () => {
-    axios.get(utcServiceUrl).then(({data}) => setUtc(data));
-  };
+  const atualiza = () => fetch(utcServiceUrl).then(responseJson).then(setUtc);
 
   useEffect(atualiza, []);
 
