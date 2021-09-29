@@ -4,6 +4,11 @@ import "./App.css";
 const utcServiceUrl = `https://app-current-utc-git-fernandobh.herokuapp.com`;
 const responseJson = response => response.json();
 
+// TODO
+// context
+// router
+
+
 function Agora() {
   const [utc, setUtc] = useState(`loading`);
 
