@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext, createContext } from "react";
+import { HashRouter, Switch, Route } from "react-router-dom";
 import "./App.css";
-
-// TODO: Router
 
 function Abc(props) {
   return <pre>{JSON.stringify(props)}</pre>;
@@ -12,6 +11,14 @@ const Xyz = ({ x, y, z }) => (
     X: {x}, Y: {y}, Z: {z}
   </div>
 );
+
+function AbcUse() {
+  return <Abc a="1" b="2" c="3" />;
+}
+
+function XyzUse() {
+  return <Xyz x="1" y="2" z="3" />;
+}
 
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
@@ -91,23 +98,44 @@ function ModificaContextoHooks() {
 
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
+function Home() {
+  return <div>Hello there!</div>;
+}
+
+const Routes = () => (
+  <HashRouter>
+    <Switch>
+      <Route path="/" exact component={Home} />
+      <Route path="/AbcUse/" exact component={AbcUse} />
+      <Route path="/XyzUse/" exact component={XyzUse} />
+      <Route path="/Termostato/" exact component={Termostato} />
+      <Route path="/Agora/" exact component={Agora} />
+      <Route path="/VerContexto/" component={VerContexto} />
+      <Route path="/ModificaContexto/" component={ModificaContexto} />
+      <Route path="/VerContextoHooks/" component={VerContextoHooks} />
+      <Route path="/ModificaContextoHooks/" component={ModificaContextoHooks} />
+    </Switch>
+  </HashRouter>
+);
+
 function App() {
   const [change, setChange] = useState(1);
 
   return (
     <div className="App">
-      <header className="App-header">
-        <LastChangeContext.Provider value={{ change, setChange }}>
-          <Abc a="1" b="2" c="3" />
-          <Xyz x="1" y="2" z="3" />
-          <Termostato />
-          <Agora />
-          <VerContexto />
-          <ModificaContexto />
-          <VerContextoHooks />
-          <ModificaContextoHooks />
-        </LastChangeContext.Provider>
-      </header>
+      <LastChangeContext.Provider value={{ change, setChange }}>
+        <a href="/#">Home</a>
+        <a href="/#AbcUse">AbcUse</a>
+        <a href="/#XyzUse">XyzUse</a>
+        <a href="/#Termostato">Termostato</a>
+        <a href="/#Agora">Agora</a> -<a href="#VerContexto">VerContexto</a>
+        <a href="/#ModificaContexto">ModificaContexto</a>
+        <a href="/#VerContextoHooks">VerContextoHooks</a>
+        <a href="/#ModificaContextoHooks">ModificaContextoHooks</a>
+        <br />
+        <br />
+        <Routes />
+      </LastChangeContext.Provider>
     </div>
   );
 }
