@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext, createContext } from "react";
-import { HashRouter, BrowserRouter, Switch, Route, useParams } from "react-router-dom";
+import { HashRouter, BrowserRouter, Switch, Route, useParams, Link } from "react-router-dom";
 import "./App.css";
 
 function Abc(props) {
@@ -104,41 +104,37 @@ function Home() {
   return <div>Hello there!</div>;
 }
 
-const Routes = () => (
-  <BrowserRouter>
-    <Switch>
-      <Route path="/" exact component={Home} />
-      <Route path="/AbcUse/:a/:b/:c" exact component={AbcUse} />
-      <Route path="/XyzUse/:x/:y/:z" exact component={XyzUse} />
-      <Route path="/Termostato/" exact component={Termostato} />
-      <Route path="/Agora/" exact component={Agora} />
-      <Route path="/VerContexto/" component={VerContexto} />
-      <Route path="/ModificaContexto/" component={ModificaContexto} />
-      <Route path="/VerContextoHooks/" component={VerContextoHooks} />
-      <Route path="/ModificaContextoHooks/" component={ModificaContextoHooks} />
-    </Switch>
-  </BrowserRouter>
-);
-
 function App() {
   const [change, setChange] = useState(1);
 
   return (
     <div className="App">
-      <LastChangeContext.Provider value={{ change, setChange }}>
-        <a href="/">Home</a>
-        <a href="/AbcUse/a/b/c">AbcUse</a>
-        <a href="/XyzUse/1/2/3">XyzUse</a>
-        <a href="/Termostato">Termostato</a>
-        <a href="/Agora">Agora</a>
-        <a href="/VerContexto">VerContexto</a>
-        <a href="/ModificaContexto">ModificaContexto</a>
-        <a href="/VerContextoHooks">VerContextoHooks</a>
-        <a href="/ModificaContextoHooks">ModificaContextoHooks</a>
-        <br />
-        <br />
-        <Routes />
-      </LastChangeContext.Provider>
+      <BrowserRouter>
+        <LastChangeContext.Provider value={{ change, setChange }}>
+          <Link to="/">Home</Link>
+          <Link to="/AbcUse/a/b/c">AbcUse</Link>
+          <Link to="/XyzUse/1/2/3">XyzUse</Link>
+          <Link to="/Termostato">Termostato</Link>
+          <Link to="/Agora">Agora</Link>
+          <Link to="/VerContexto">VerContexto</Link>
+          <Link to="/ModificaContexto">ModificaContexto</Link>
+          <Link to="/VerContextoHooks">VerContextoHooks</Link>
+          <Link to="/ModificaContextoHooks">ModificaContextoHooks</Link>
+          <br />
+          <br />
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/AbcUse/:a/:b/:c" exact component={AbcUse} />
+            <Route path="/XyzUse/:x/:y/:z" exact component={XyzUse} />
+            <Route path="/Termostato/" exact component={Termostato} />
+            <Route path="/Agora/" exact component={Agora} />
+            <Route path="/VerContexto/" component={VerContexto} />
+            <Route path="/ModificaContexto/" component={ModificaContexto} />
+            <Route path="/VerContextoHooks/" component={VerContextoHooks} />
+            <Route path="/ModificaContextoHooks/" component={ModificaContextoHooks} />
+          </Switch>
+        </LastChangeContext.Provider>
+      </BrowserRouter>
     </div>
   );
 }
