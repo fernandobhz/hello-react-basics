@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext, createContext } from "react";
-import { HashRouter, Switch, Route } from "react-router-dom";
+import { HashRouter, BrowserRouter, Switch, Route, useParams } from "react-router-dom";
 import "./App.css";
 
 function Abc(props) {
@@ -13,11 +13,13 @@ const Xyz = ({ x, y, z }) => (
 );
 
 function AbcUse() {
-  return <Abc a="1" b="2" c="3" />;
+  const { a, b, c } = useParams();
+  return <Abc a={a} b={b} c={c} />;
 }
 
 function XyzUse() {
-  return <Xyz x="1" y="2" z="3" />;
+  const { x, y, z } = useParams();
+  return <Xyz x={x} y={y} z={z} />;
 }
 
 // ----------------------------------------------------------------------------------------------------------------------------------------
@@ -103,11 +105,11 @@ function Home() {
 }
 
 const Routes = () => (
-  <HashRouter>
+  <BrowserRouter>
     <Switch>
       <Route path="/" exact component={Home} />
-      <Route path="/AbcUse/" exact component={AbcUse} />
-      <Route path="/XyzUse/" exact component={XyzUse} />
+      <Route path="/AbcUse/:a/:b/:c" exact component={AbcUse} />
+      <Route path="/XyzUse/:x/:y/:z" exact component={XyzUse} />
       <Route path="/Termostato/" exact component={Termostato} />
       <Route path="/Agora/" exact component={Agora} />
       <Route path="/VerContexto/" component={VerContexto} />
@@ -115,7 +117,7 @@ const Routes = () => (
       <Route path="/VerContextoHooks/" component={VerContextoHooks} />
       <Route path="/ModificaContextoHooks/" component={ModificaContextoHooks} />
     </Switch>
-  </HashRouter>
+  </BrowserRouter>
 );
 
 function App() {
@@ -124,14 +126,14 @@ function App() {
   return (
     <div className="App">
       <LastChangeContext.Provider value={{ change, setChange }}>
-        <a href="/#">Home</a>
-        <a href="/#AbcUse">AbcUse</a>
-        <a href="/#XyzUse">XyzUse</a>
-        <a href="/#Termostato">Termostato</a>
-        <a href="/#Agora">Agora</a> -<a href="#VerContexto">VerContexto</a>
-        <a href="/#ModificaContexto">ModificaContexto</a>
-        <a href="/#VerContextoHooks">VerContextoHooks</a>
-        <a href="/#ModificaContextoHooks">ModificaContextoHooks</a>
+        <a href="/">Home</a>
+        <a href="/AbcUse/a/b/c">AbcUse</a>
+        <a href="/XyzUse/1/2/3">XyzUse</a>
+        <a href="/Termostato">Termostato</a>
+        <a href="/Agora">Agora</a> -<a href="#VerContexto">VerContexto</a>
+        <a href="/ModificaContexto">ModificaContexto</a>
+        <a href="/VerContextoHooks">VerContextoHooks</a>
+        <a href="/ModificaContextoHooks">ModificaContextoHooks</a>
         <br />
         <br />
         <Routes />
