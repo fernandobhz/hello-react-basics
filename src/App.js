@@ -59,25 +59,22 @@ function Agora() {
 
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
-const LastChangeContext = createContext({
-  change: 1,
-  setChange: () => {},
-});
+const LastChangeContext = createContext();
+
+const VerContextoCallbackChildren = ({ change }) => <div>A ultima mudança foi: '{change}'</div>;
 
 function VerContexto() {
-  return <LastChangeContext.Consumer>{({ change }) => <div>A ultima mudança foi: '{change}'</div>}</LastChangeContext.Consumer>;
+  return <LastChangeContext.Consumer>{VerContextoCallbackChildren}</LastChangeContext.Consumer>;
 }
 
+const ModificaContextoCallbackChildren = ({ setChange }) => (
+  <div>
+    <button onClick={() => setChange(prompt("qual o novo valor do contexto?", Math.random().toString(36).slice(-5)))}>Atualizar contexto</button>
+  </div>
+);
+
 function ModificaContexto() {
-  return (
-    <LastChangeContext.Consumer>
-      {({ setChange }) => (
-        <div>
-          <button onClick={() => setChange(prompt("qual o novo valor do contexto?", Math.random().toString(36).slice(-5)))}>Atualizar contexto</button>
-        </div>
-      )}
-    </LastChangeContext.Consumer>
-  );
+  return <LastChangeContext.Consumer>{ModificaContextoCallbackChildren}</LastChangeContext.Consumer>;
 }
 
 // ----------------------------------------------------------------------------------------------------------------------------------------
