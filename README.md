@@ -4,4 +4,4 @@ This is a very simple example of all the basic features of react. I will teach t
 
 # Live
 
-[https://hello-react-basics.herokuapp.com/Agora](https://hello-react-basics.herokuapp.com/Agora)
+[https://hello-react-basics.herokuapp.com](https://hello-react-basics.herokuapp.com)
