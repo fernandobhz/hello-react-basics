@@ -103,7 +103,7 @@ function ChangeContextHooks() {
 // ----------------------------------------------------------------------------------------------------------------------------------------
 
 function Home() {
-  return <div>Hello there!</div>;
+  return <>Hello there!</>;
 }
 
 function App() {
